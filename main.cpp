@@ -37,12 +37,13 @@ int main() {
    cout<< findNumberOfCreatedAppliances() <<endl;
    cout << (*a4 == *a2) << endl;*/
     cout << "====Appliance Tracker===" << endl;
-    cout << "Please enter the max amount of appliances your store can contain: " << endl;
+
     int inventory_nb;
-    cin >> inventory_nb;
-    int* inventory = new int[inventory_nb];
+    int* inventory  ;
+    int inventory_max;
 
-
+    cout << "Please enter the max amount of appliances your store can contain: " << endl;
+    cin >> inventory_max;
     /*int option_nb;
     do {
         cout << "What do you want to do? " << endl;
@@ -57,36 +58,52 @@ int main() {
 
     const string password = "c249";
     string employee_pw;
-    int pw_count=0;
-    int menu_count = 0;
+    int menu_cnt = 0;
+    int pw_count = 0;
 
-      switch (menu_option())
-      {
-      case 1:
-          for (int i = 0; i < 4; i++) {
-              do {
-                  pw_count++;
-                  menu_count++;
-                  cout << "Please enter your password: " << endl;
-                  cin >> employee_pw;
-              } while (employee_pw != password && pw_count < 3);
-              if (pw_count % 3 == 0 && menu_count != 12) {
-                  menu_option();
-              }
-              else if (employee_pw == password) {
-                  i = 0;
-              }
-              pw_count = 0;
+    switch (menu_option())
+    {
+    case 1:
 
-          }
-          cout << "Program detected suspicious activities and will terminate immediately!" << endl;
-          break;
-      default:
-          break;
-      }
+        cout << "Please enter your password: " << endl;
+        cin >> employee_pw;
+        if (employee_pw != password) {
+            for (int i = 0; i < 4; i++) {
+                do {
+                    menu_cnt++;
+                    pw_count++;
+                    cout << "Please enter your password: " << endl;
+                    cin >> employee_pw;
+                    if (employee_pw == password) {
+                        cout << "Please enter the max amount of appliances you want to add to the inventory array: " << endl;
+                        cin >> inventory_nb;
+                        if (inventory_max <= inventory_nb) {
+                            inventory = new int[inventory_nb];
+                        }
+                        inventory = new int[inventory_nb];
+                    }
+                } while (employee_pw != password && menu_cnt < 3);
+                if (menu_cnt % 3 == 0 && pw_count != 12) {
+                    menu_option();
+                }
+                
+                menu_cnt = 0;
+                cout << "Program detected suspicious activities and will terminate immediately!" << endl;
+
+            }
+        }
+        else if (employee_pw == password) {
+            cout << "Please enter the max amount of appliances your store can contain: " << endl;
+            cin >> inventory_nb;
+            inventory = new int[inventory_nb];
+        }
+        break;
+    default:
+        break;
+    }
 
 
-      return 0;
+    return 0;
 
-   
-}
+
+} 
